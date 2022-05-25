@@ -9,3 +9,63 @@ next_state = initial_state
 print("Initial State")
 for row in initial_state :
 	print(row)
+
+
+# to find next state after 1 sec
+for row in range(0, len(initial_state)):
+		for index in range(0, len(initial_state[row])) :
+				
+                # to count the  live cells around the present  cell
+				live_cells = 0
+
+
+                # counting live cells in the above row of the cell if any
+				if( row - 1 >= 0):
+				
+					if(index-1 >= 0 and initial_state[row-1][index-1]):
+							live_cells = live_cells +1 
+					if(initial_state[row-1][index]):
+							live_cells = live_cells +1 
+					if(index+1 < len(initial_state[row-1]) and initial_state[row-1][index+1] ):
+							live_cells = live_cells +1 
+
+                # counting live cells in the below row of the cell if any
+				if(row+1 < len(initial_state)) :
+				
+					if(index-1 >= 0 and  initial_state[row+1][index-1]):
+							live_cells = live_cells +1 
+					if(initial_state[row+1][index]):
+							live_cells = live_cells +1 
+					if(index +1 < len(initial_state[row+1]) and initial_state[row+1][index+1] ):
+							live_cells = live_cells +1 
+
+				# counting live cells on its left and right side if any
+				if(index-1 >= 0 and initial_state[row][index-1]):
+							live_cells = live_cells +1 
+				if(index+1 < len(initial_state[row]) and initial_state[row][index+1] ):
+							live_cells = live_cells +1 
+
+
+                # Now we have the live cells count aroud the cell
+
+                # if the current the cell is living cell
+				if(initial_state[row][index]):
+
+                    # if the live cells are greater than 3 or less than 2 that living cell must die 
+					if(live_cells < 2 or live_cells > 3):
+						next_state[row][index] = 0
+				else :
+
+                    # if the dead cell has exact three number of living cells it will have life
+					if(live_cells == 3):
+						next_state[row][index] = 1
+
+# Printing the next state 		
+print("\nNext State")
+for row in initial_state :
+		print(row)
+
+
+
+
+
